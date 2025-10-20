@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Job 05 - Footer Scroll</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <!-- Zone de contenu visible pour permettre le scroll. -->
+    <h1>Scroll pour voir le footer changer</h1>
+    <p>Contenu de remplissage...</p>
+  </main>
+
+  <!-- Footer fixé en bas de la fenêtre. L'élément interne #progress sert
+       d'indicateur de progression (sa largeur change en fonction du scroll).
+  -->
+  <footer id="site-footer" aria-hidden="false">
+    <div id="progress"></div>
+  </footer>
+
+  <script>
+    // Références vers les éléments DOM utilisés pour afficher l'état de scroll.
+    const progress = document.getElementById('progress');
+    const footer = document.getElementById('site-footer');
+
+    // updateProgress() calcule le pourcentage de défilement (scroll) de la
+    // page et met à jour :
+    // - la largeur de l'élément #progress (effet barre de chargement)
+    // - la couleur de fond du footer (transition visuelle selon le pourcentage)
+    function updateProgress() {
+      // position verticale actuelle du scroll
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      // hauteur totale défilable : scrollHeight - hauteur de la fenêtre
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      // pourcentage entre 0 et 1
+      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0;
+
+      // largeur du 'progress' en pourcentage (valeur visuelle)
+      progress.style.width = Math.round(pct * 100) + '%';
+
+      // Calcul simple d'une couleur qui évolue : du rouge (début) vers le vert (fin)
+      // r décroît quand pct augmente, g augmente; b reste fixe pour garder une teinte chaude.
+      const r = Math.round(255 * (1 - pct));
+      const g = Math.round(128 + 127 * pct);
+      const b = 60;
+      footer.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    // On met à jour au scroll et au redimensionnement de la fenêtre
+    window.addEventListener('scroll', updateProgress);
+    window.addEventListener('resize', updateProgress);
+    // Initialisation à l'ouverture de la page
+    updateProgress();
+  </script>
+</body>
+</html>
