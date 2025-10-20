@@ -1,0 +1,47 @@
+/* Job 05 styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  /* Exigence : taille minimale de la page */
+  min-height: 4096px; /* requirement */
+}
+
+main {
+  padding: 2rem;
+}
+
+footer#site-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: rgb(255,128,60);
+  display: flex;
+  align-items: center;
+}
+
+#progress {
+  height: 100%;
+  width: 0%;
+  background: rgba(0,0,0,0.15);
+  transition: width 0.15s linear;
+}
+
+/* ensure footer content sits above progress bar */
+footer#site-footer::after {
+  content: '';
+}
+
+/* Notes :
+ - Le footer est fixé en bas de la fenêtre (position: fixed) et occupe
+   toute la largeur.
+ - L'élément #progress sert d'indicateur visuel de la progression de
+   scroll : sa largeur est mise à jour en JS.
+ - La couleur du footer est également modifiée en JS selon le pourcentage
+   de scroll (du rouge vers le vert dans l'exemple fourni).
+*/

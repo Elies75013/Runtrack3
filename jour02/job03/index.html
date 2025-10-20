@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Job 03 - Compteur</title>
+</head>
+<body>
+  <button id="button">Ajouter 1</button>
+  <p id="compteur">0</p>
+
+  <script>
+    // Fonction addone() : incrémente la valeur numérique affichée dans
+    // <p id="compteur"> à chaque clic sur le bouton.
+    // Important : on n'utilise pas d'attribut onclick inline dans le HTML.
+    function addone() {
+      const p = document.getElementById('compteur');
+      // parseInt protège contre des contenus non numériques éventuels
+      let n = parseInt(p.textContent, 10) || 0;
+      n += 1;
+      p.textContent = n; // on met à jour l'affichage
+    }
+
+    // Liaison de l'événement click au bouton via addEventListener.
+    document.getElementById('button').addEventListener('click', addone);
+  </script>
+</body>
+</html>

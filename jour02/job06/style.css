@@ -1,0 +1,27 @@
+/* Default: blank page */
+body { margin: 0; min-height: 100vh; }
+
+/* La Plateforme_ themed styling when konami code is activated */
+body.konami-active {
+  background: linear-gradient(135deg, #00a5e4 0%, #002b5c 100%);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.konami-active::before {
+  content: "La Plateforme_";
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* Notes :
+ - La classe 'konami-active' est ajoutée dynamiquement en JS lorsqu'une
+   séquence de touches (le Konami code) est détectée.
+ - Ici on applique un grand titre centré et un dégradé rappelant la
+   charte de La Plateforme_. Le contenu d'origine reste vide par défaut
+   comme demandé.
+*/

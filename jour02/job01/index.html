@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Job 01 - Citation</title>
+</head>
+<body>
+  <article id="citation">La vie a beaucoup plus d’imagination que nous</article>
+  <button id="button">Afficher la citation</button>
+
+  <script>
+    // Fonction nommée 'citation()' demandée par l'exercice.
+    // Récupère le contenu textuel de l'élément <article id="citation"> et l'affiche
+    // dans la console de développement (console du navigateur).
+    function citation() {
+      const el = document.getElementById('citation'); // on cible l'élément
+      console.log(el.textContent); // on affiche son texte dans la console
+    }
+
+    // On attache la fonction à l'événement 'click' du bouton. Utilisation de
+    // addEventListener pour respecter la consigne d'éviter onclick inline.
+    document.getElementById('button').addEventListener('click', citation);
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Job 02 - Show/Hide</title>
+</head>
+<body>
+  <button id="button">Afficher / Masquer la citation</button>
+
+  <script>
+    // Variable qui contient la référence de l'article créé dynamiquement.
+    // Null signifie qu'il n'existe pas encore sur la page.
+    let articleEl = null;
+
+    // Fonction showhide() : elle crée l'article s'il n'existe pas, ou le supprime
+    // s'il est déjà présent. C'est la fonction demandée par l'exercice.
+    function showhide() {
+      // Si l'article existe et est déjà dans le DOM, on le supprime.
+      if (articleEl && document.body.contains(articleEl)) {
+        articleEl.remove();
+        articleEl = null; // on remet la référence à null
+        return;
+      }
+
+      // Sinon, on crée l'élément <article>, on lui assigne le texte demandé
+      // et on l'ajoute à la fin du <body>.
+      articleEl = document.createElement('article');
+      articleEl.textContent = "L'important n'est pas la chute, mais l'atterrissage.";
+      document.body.appendChild(articleEl);
+    }
+
+    // Attache de l'événement 'click' au bouton pour appeler showhide().
+    document.getElementById('button').addEventListener('click', showhide);
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Job 04 - Keylogger</title>
+</head>
+<body>
+  <textarea id="keylogger" rows="10" cols="50"></textarea>
+
+  <script>
+    // Référence vers le textarea qui recevra les lettres tapées.
+    const ta = document.getElementById('keylogger');
+
+    // Ecoute globale des touches du clavier.
+    // L'exercice demande d'ajouter chaque lettre (a-z) dans le textarea même
+    // si le focus n'est pas dans le textarea. Si le textarea a le focus, on
+    // ajoute la lettre deux fois.
+    window.addEventListener('keydown', (e) => {
+      // Récupère la touche frappée (peut être une lettre, 'ArrowUp', etc.)
+      const key = e.key;
+      // On ne traite que les touches qui correspondent à un seul caractère
+      // et qui sont des lettres (lettres majuscules ou minuscules).
+      if (!key || key.length !== 1) return;
+      const isLetter = /^[a-zA-Z]$/.test(key);
+      if (!isLetter) return;
+
+      // Empêche le comportement par défaut pour éviter des effets
+      // secondaires lorsqu'on tape dans d'autres champs.
+      e.preventDefault();
+
+      // Si le textarea a le focus (activeElement), on ajoute la lettre deux fois.
+      const toAdd = ta === document.activeElement ? key + key : key;
+      ta.value += toAdd;
+    });
+  </script>
+</body>
+</html>
