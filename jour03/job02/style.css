@@ -1,0 +1,33 @@
+#rainbow-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.rainbow-img {
+    width: 100px;
+    height: 100px;
+    cursor: grab;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+#message {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 20px;
+}
+#order-container {
+    display: flex;
+    gap: 10px;
+    min-height: 110px;
+    margin-bottom: 20px;
+}
+.dropzone {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+}

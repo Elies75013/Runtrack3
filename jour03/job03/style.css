@@ -1,0 +1,48 @@
+#taquin-board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin-bottom: 20px;
+}
+.taquin-tile {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.taquin-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.taquin-empty {
+    background: #f9f9f9;
+    border: 2px dashed #aaa;
+    cursor: default;
+}
+#message {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+#restartBtn {
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: none;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+#restartBtn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}

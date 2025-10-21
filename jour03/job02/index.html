@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Job 02 - Arc-en-ciel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="shuffleBtn">Mélanger les images</button>
+    <div id="rainbow-container">
+        <img src="arc1.png" alt="Arc 1" class="rainbow-img" draggable="true" id="img1">
+        <img src="arc2.png" alt="Arc 2" class="rainbow-img" draggable="true" id="img2">
+        <img src="arc3.png" alt="Arc 3" class="rainbow-img" draggable="true" id="img3">
+        <img src="arc4.png" alt="Arc 4" class="rainbow-img" draggable="true" id="img4">
+        <img src="arc5.png" alt="Arc 5" class="rainbow-img" draggable="true" id="img5">
+        <img src="arc6.png" alt="Arc 6" class="rainbow-img" draggable="true" id="img6">
+    </div>
+    <div id="order-container">
+        <div class="dropzone" data-index="0"></div>
+        <div class="dropzone" data-index="1"></div>
+        <div class="dropzone" data-index="2"></div>
+        <div class="dropzone" data-index="3"></div>
+        <div class="dropzone" data-index="4"></div>
+        <div class="dropzone" data-index="5"></div>
+    </div>
+    <button id="checkBtn">Vérifier l'ordre</button>
+    <div id="message"></div>
+    <script src="script.js"></script>
+</body>
+</html>
