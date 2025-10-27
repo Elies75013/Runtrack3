@@ -1,0 +1,67 @@
+
+
+/* Reset léger */
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --max-width:760px;
+  --accent:#0a66c2;
+  --muted:#6b7280;
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --danger:#b00020;
+  --radius:10px;
+}
+
+html,body{
+  height:100%;background:var(--bg);font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:#0f1720;-webkit-font-smoothing:antialiased;line-height:1.35
+}
+
+/* header / navigation */
+.site-header{background:transparent;padding:18px 16px}
+.nav{display:flex;gap:10px;align-items:center;justify-content:flex-start;max-width:var(--max-width);margin:0 auto}
+.nav__link{padding:8px 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-weight:600;border:1px solid transparent}
+.nav__link:hover{background:#eef6ff;color:var(--accent);border-color:#dceeff}
+.nav__link.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* container central */
+.container{max-width:var(--max-width);margin:22px auto;padding:28px;background:var(--card);border-radius:var(--radius);box-shadow:0 10px 30px rgba(11,22,45,0.06)}
+
+h1{font-size:20px;margin-bottom:14px;color:#071133}
+
+/* Form layout */
+.form-group{margin-bottom:14px}
+label{display:block;font-weight:600;margin-bottom:6px;color:#0f1720}
+input[type="text"],input[type="email"],input[type="password"],textarea,select{
+  width:100%;padding:10px 12px;border:1px solid #e6eef8;border-radius:8px;background:#fbfdff;color:#071133;font-size:14px
+}
+input::placeholder{color:#9aa6b2}
+
+/* Small helper / hint */
+.hint{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* Buttons */
+button{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:700}
+button:disabled{opacity:0.65;cursor:not-allowed}
+
+/* Error messages under inputs */
+.error{color:var(--danger);font-size:13px;margin-top:6px;min-height:18px}
+
+/* Responsive tweaks */
+@media (max-width:640px){
+  .container{margin:14px;padding:18px}
+  .nav{padding:0 6px}
+}
+
+/* Small utility classes */
+.row{display:flex;gap:12px}
+.col{flex:1}
+.center{text-align:center}
+
+/* Focus styles for accessibility */
+input:focus,button:focus{outline:3px solid rgba(10,102,194,0.12);box-shadow:0 0 0 3px rgba(10,102,194,0.06)}
+
+/* Optional: subtle form width limit for very wide screens */
+@media(min-width:1200px){
+  .container{max-width:680px}
+}
