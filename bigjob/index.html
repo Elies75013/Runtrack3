@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Plateforme_ - Gestion de Présence</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Page de connexion/inscription -->
+    <div id="authPage" class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2 class="mb-0">La Plateforme_</h2>
+                <p class="mb-0 mt-2">Gestion de Présence</p>
+            </div>
+            <div class="auth-body">
+                <!-- Formulaire de connexion -->
+                <div id="loginForm">
+                    <h4 class="mb-4">Connexion</h4>
+                    <form onsubmit="handleLogin(event)">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Se connecter</button>
+                    </form>
+                    <p class="text-center">
+                        Pas encore de compte ? 
+                        <a href="#" onclick="showRegisterForm(); return false;">S'inscrire</a>
+                    </p>
+                </div>
+
+                <!-- Formulaire d'inscription -->
+                <div id="registerForm" class="hidden">
+                    <h4 class="mb-4">Inscription</h4>
+                    <form onsubmit="handleRegister(event)">
+                        <div class="mb-3">
+                            <label class="form-label">Nom complet</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email La Plateforme_</label>
+                            <input type="email" class="form-control" id="registerEmail" required 
+                                   pattern=".*@laplateforme\.io$" 
+                                   title="Utilisez votre email @laplateforme.io">
+                            <small class="form-text text-muted">Utilisez votre email @laplateforme.io</small>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="registerPassword" required minlength="6">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">S'inscrire</button>
+                    </form>
+                    <p class="text-center">
+                        Déjà inscrit ? 
+                        <a href="#" onclick="showLoginForm(); return false;">Se connecter</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application principale -->
+    <div id="mainApp" class="hidden">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-graduation-cap me-2"></i>La Plateforme_
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showCalendar(); return false;">
+                                <i class="fas fa-calendar me-1"></i>Calendrier
+                            </a>
+                        </li>
+                        <li class="nav-item" id="backofficeLink" style="display:none;">
+                            <a class="nav-link" href="#" onclick="showBackoffice(); return false;">
+                                <i class="fas fa-users-cog me-1"></i>Backoffice
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle me-1"></i><span id="userName"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#" onclick="logout(); return false;">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Déconnexion
+                                </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container main-content">
+            <!-- Vue Calendrier -->
+            <div id="calendarView" class="content-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3><i class="fas fa-calendar-alt me-2"></i>Calendrier de Présence</h3>
+                    <div>
+                        <button class="btn btn-outline-primary" onclick="changeMonth(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="mx-3 fw-bold" id="currentMonth"></span>
+                        <button class="btn btn-outline-primary" onclick="changeMonth(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Cliquez sur un jour pour faire une demande de présence. Les jours passés ne sont plus modifiables.
+                </div>
+
+                <div class="calendar-header">
+                    <div>Lun</div>
+                    <div>Mar</div>
+                    <div>Mer</div>
+                    <div>Jeu</div>
+                    <div>Ven</div>
+                    <div>Sam</div>
+                    <div>Dim</div>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+
+                <div class="mt-4">
+                    <h5>Légende :</h5>
+                    <div class="d-flex flex-wrap gap-3">
+                        <span><span class="status-indicator status-pending"></span>En attente</span>
+                        <span><span class="status-indicator status-approved"></span>Approuvé</span>
+                        <span><span class="status-indicator status-rejected"></span>Refusé</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vue Backoffice -->
+            <div id="backofficeView" class="hidden">
+                <!-- Gestion des demandes -->
+                <div class="content-card">
+                    <h3 class="mb-4"><i class="fas fa-clipboard-list me-2"></i>Demandes de Présence</h3>
+                    <div id="requestsList"></div>
+                </div>
+
+                <!-- Gestion des utilisateurs (admin seulement) -->
+                <div id="adminPanel" class="content-card" style="display:none;">
+                    <h3 class="mb-4"><i class="fas fa-users-cog me-2"></i>Gestion des Utilisateurs</h3>
+                    <div id="usersList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour demande de présence -->
+    <div class="modal fade" id="requestModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Demande de Présence</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Souhaitez-vous demander à être présent le <strong id="modalDate"></strong> ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="submitRequest()">Confirmer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/backoffice.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
